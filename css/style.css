@@ -6,4 +6,6 @@ div.themes ul {
   list-style: none;
 }
 
-h1 {color: red;}
+h1 {
+  text-align: center;
+}

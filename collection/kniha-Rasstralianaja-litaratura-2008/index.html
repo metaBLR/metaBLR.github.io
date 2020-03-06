@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="be">
+  
+  <head>
+    <title>metaBelarus</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="Беларусь Belarus мова памяць літаратура">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="/js/script.js"></script>
+  </head>
+
+  <body onload="loadData(loadDataSub)">
+      <!-- ({empty:'nodata'} -->
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/index.html">Галоўная</a></li>
+        </ul>
+      </nav>  
+    </header>
+    
+    <main>
+
+    <div id="divH1"></div>
+    <div id="divContent"></div>
+
+      
+      <!-- <div class="tabs-nav">
+        <div id="tab-labels" class="tabs-container">
+          <button class="tab-label" onclick="openTab(event, 'PDF-book')">Кніга</button>
+        </div>
+      </div>
+      
+      <div id="PDF-book" class="tab-panel">
+        <h3>Расстраляная літаратура (Кнігазбор, 2008)</h3>
+        <ul class="link-list">
+          <li><a href="/pdfjs/web/viewer.html?file=/pdf/20031-1.pdf#page=100" target="_blank">Чытаць анлайн (PDF.js)</a></li>
+          <li><a href="/pdf/20031-1.pdf#page=120" target="_blank">Плагін браўзера</a></li>
+        </ul>
+      </div> -->
+
+    </main>
+
+    <footer>
+      <div class="top-scroller"><span></span></div>
+      <div>
+        <a href="https://info.flagcounter.com/SO9r"><img src="https://s11.flagcounter.com/count2/SO9r/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+      </div>
+    </footer>
+
+    <script id="data-template" type="text/template">
+    </script>
+
+    <script>
+      function loadDataSub(data) {
+        var tabs = [
+          {name: "tabPDFbook", title: "Кніга", header: "Расстраляная літаратура (Кнігазбор, 2008)"}
+        ]; 
+        
+        var links = [
+          {
+          content: [
+            {title: "Чытаць анлайн (PDF.js)", link: "/pdfjs/web/viewer.html?file=/pdf/20031-1.pdf#page=100"},
+            {title: "Плагін браўзера"       , link: "/pdf/20031-1.pdf#page=120"}
+          ]
+          }
+        ];
+
+        // tab labels + panels
+        var html_tab_labels = "<div class=\"tabs-nav\"><div class=\"tabs-container\">";
+        var html_tab_panels = "";
+        for (var i = 0; i < tabs.length; i++) {
+          html_tab_labels += "<button class=\"tab-label\" onclick=\"openTab(event, '" + tabs[i].name + "')\">" + tabs[i].title + "</button>\n";
+          html_tab_panels += "<div id='" + tabs[i].name + "' class='tab-panel'>" +            
+            "<h3>" + tabs[i].header + "</h3>" +
+            "<ul class='link-list'>";
+            for (var j = 0; j < links[i].content.length; j++) {
+              html_tab_panels += "<li><a href='" +  links[i].content[j].link + "' target='_blank'>" + links[i].content[j].title + "</a></li>";
+            }
+          html_tab_panels += "</ul></div>";
+        };
+        // "<li><a href='/pdfjs/web/viewer.html?file=" +  tabs[i].file + "' target='_blank'>Чытаць анлайн (PDF.js)</a></li>" +
+        html_tab_labels += "</div></div>";
+        $("#divContent").append(html_tab_labels);
+        $("#divContent").append(html_tab_panels);        
+      }
+    </script>
+
+  </body>
+  
+</html>

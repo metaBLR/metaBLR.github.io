@@ -1,0 +1,31 @@
+﻿{
+  "metadata": {
+    "title": "Калекцыі"
+  },
+  "FUNC" : "",
+
+  "collections": [
+    { 
+      "URL": "/collection/TuzinFM-(nie)rasstralianaja-paezija",
+      "Title": "1"
+    },{
+      "URL": "/collection/kniha-Rasstralianaja-litaratura-2008",
+      "Title": "2"
+    },{
+      "URL": "/collection/kaliandar-zmahara",
+      "Title": "2"
+    },{
+      "URL": "/collection/1863-paustanckija-miasciny",
+      "Title": "3"
+    },{
+      "URL": "/collection/NN-harady-mahdeburhskaha-prava",
+      "Title": "4"
+    },{
+      "URL": "/collection/NN-bielaruskija-hieraini",
+      "Title": "5"
+    },{
+      "URL": "/collection/kniznia",
+      "Title": "6"
+    }
+  ]
+}

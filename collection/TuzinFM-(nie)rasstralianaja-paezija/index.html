@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="be">
+  
+  <head>
+    <title>metaBelarus</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Згуртаваныя звесткі пра Беларусь">
+    <meta name="keywords" content="Беларусь, Belarus, мова, літаратура, памяць">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="/js/script.js"></script>
+  </head>
+
+  <body onload="loadData(loadDataSub)">
+    
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/index.html">Галоўная</a></li>
+        </ul>
+      </nav>
+      <a href="#" title="Play/Pause" class="play active"></a>   
+    </header>
+    
+    <main>
+      <div id="divH1"></div>
+      <div class="tabs-nav">
+        <div class="tabs-container">
+          <button class="tab-label" onclick="openTab(event, 'About')">Звесткі</button>
+          <button class="tab-label" onclick="openTab(event, 'Sndcloud-playlist')">Аўдыярэліз</button>
+          <button class="tab-label" onclick="openTab(event, 'Youtube-playlist')">Відэаверсія</button>
+          <button class="tab-label" onclick="openTab(event, 'PDF-book')">Кніга</button>
+        </div>
+      </div>
+      <div id="About" class="tab-panel">
+        <h3>Пра праект</h3>
+        <ul class="link-list">
+          <li><a href="https://be.wikipedia.org/wiki/(Не)расстраляныя">(Не)расстраляныя — Вікіпедыя</a></li>
+          <li><a href="https://tuzinfm.by/article/3996/nierasstralanaja-paezija-premjera-muzycnaha-prajektu.html">«(Не) расстраляная паэзія». Прэм’ера музычнага праекту і курсу відэалекцыяў пра паэтаў 1930-х (аўдыё+відэа)</a></li>
+          <li><a href="https://tuzinfm.by/article/4202/nierasstralanyja-praciah-prajektu-tuzinfm-videa-rasklad.html">«(Не)расстраляныя». Працяг праекту TuzinFM (відэа+расклад лекцыяў)</a></li>
+        </ul>
+      </div>
+      <div id="Sndcloud-playlist" class="tab-panel">
+        <h3>Плэйліст Soundcloud</h3>
+        <iframe width="50%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/363113647&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true"></iframe>
+      </div>
+      <div id="Youtube-playlist" class="tab-panel">
+        <h3>Канцэрт у клубе «Брюгге» 29.10.2017</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL-W4XNs4lTJ3Rs83rCzql5HpLezwsb3jh" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div id="PDF-book" class="tab-panel">
+        <h3>Расстраляная літаратура (Кнігазбор, 2008)</h3>
+        <ul class="link-list">          
+          <li><a href="/pdfjs/web/viewer.html?file=/pdf/20031-1.pdf#page=100" target="_blank">Чытаць анлайн (PDF.js)</a></li>
+          <li><a href="/pdf/20031-1.pdf#page=120" target="_blank">Плагін браўзера</a></li>
+        </ul>
+      </div>
+            
+      <div id="divData" class="divAuthors"></div>
+      <div id="divPersonData"></div>
+    </main>
+
+    <footer>
+      <div class="top-scroller"><span></span></div>
+      <!-- <div>
+        <a href="https://info.flagcounter.com/SO9r"><img src="https://s11.flagcounter.com/count2/SO9r/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+      </div> -->
+      <audio id="bk-audio" src="/audio/Kaciaryna_Vadanosava-Asypaje_cherven_bely_sad.mp3" autoplay loop></audio>
+    </footer>
+
+    <!-- <ul> -->
+    <!-- <li><a href="#"><div>{{name}}<br>({{life}})</div></a></li> -->
+    <!-- </ul> -->
+    <!-- <a id="myLink" title="Click to do something" href="#" onclick="MyFunction();return false;">link text</a> -->
+  <script id="data-template" type="text/template">
+    {{#authors}}
+      <a class="dead" href="#" onclick="clickAuthor('{{name}}');return false;"><div class="author-name">{{name}}</div><div class="author-life">({{life}})</div></a>
+    {{/authors}}    
+  </script>
+
+  <script id="person-template" type="text/template">
+    <h2>{{name}} ({{life}})</h2>
+    <a href="{{wiki}}">Wiki</a>
+    <h3>Лекцыя (<b>{{lecture.lecturer}}</b>)</h3>
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/{{lecture.ytubeID}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h3>Песня «<b>{{song.title}}</b>», выканаўца <b>{{song.performer}}</b></h3>
+    <a href="https://tuzinfm.by/performer/mp3/{{song.tuzinfm}}">Старонка на TuzinFM</a>
+    <br>
+    <a href="https://soundcloud.com{{song.sndcloud.page}}">Soundcloud</a>
+    <br><br>
+    <iframe width="50%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/{{song.sndcloud.embedID}}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+  </script>
+
+  <script>
+    function loadDataSub(data) {
+    }
+
+    function clickAuthor(id) {
+      $.getJSON("data.json", function (data) {
+        var ind = -1;
+        for (var i = 0; i < data.authors.length; i++) {
+          if (id.localeCompare(data.authors[i].name) === 0) {
+            ind = i;
+            break;
+          }
+        }
+        if (ind === -1)
+          $("#divPersonData").html("<p>NO SUCH INDEX: " + id + "</p>");
+        else {
+          var author = data.authors[ind];
+          // $("#divPersonData").html("<p>" + author.name + " (" + author.life + ")</p>");
+          var tabs = [
+            {name: "tabAnnounce", title: "Анонс",             field: "announce"},
+            {name: "tabAcoustic", title: "Акустычная версія", field: "acoustic"},
+            {name: "tabLive",     title: "Ужывую",            field: "live"}
+          ];     
+          
+          var template = $("#person-template").html();
+          var html = Mustache.render(template, author);
+          $("#divPersonData").html(html);
+
+          // tabs
+          html = "<div class=\"tabs-nav\"><div class=\"tabs-container\">";
+          for (let i = 0; i < tabs.length; i++) {
+            html += "<button class=\"tab-label\" onclick=\"openTab(event, '" + tabs[i].name + "')\">" + tabs[i].title + "</button>\n"
+          };
+          html += "</div></div>";
+          $("#divPersonData").append(html);
+
+          // tab pages by youtube ids
+          for (let i = 0; i < tabs.length; i++) {
+            let isvideo = $.trim(author.song.ytubeID[tabs[i].field]).length;
+            // if ($.trim(author.song.ytubeID[tabs[i].field]).length === 0) {
+            $("#divPersonData").append(
+              "<div id='" + tabs[i].name + "' class='tab-panel'>" +
+                "<h3>" + (isvideo ? tabs[i].title : "НЯМА ВІДЭА") + "</h3>" +
+                (isvideo ? "<iframe width='640' height='360' src='https://www.youtube.com/embed/" + author.song.ytubeID[tabs[i].field] + "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>" : "" ) +
+              "</div>"
+            );
+          }
+          document.getElementById('divPersonData').scrollIntoView({behavior: 'smooth'});          
+        }
+      });      
+    }
+  </script>
+
+  </body>
+  
+</html>

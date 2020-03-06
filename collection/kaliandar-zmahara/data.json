@@ -1,0 +1,15 @@
+﻿{
+  "metadata": {
+    "title": "Каляндар змагара"
+  },
+
+  "data": [
+    { 
+      "field1": "val11",
+      "field2": "val12"
+    },{ 
+      "field1": "val21",
+      "field2": "val22"
+    }
+  ]
+}

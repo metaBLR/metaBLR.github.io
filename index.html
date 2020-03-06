@@ -1,37 +1,56 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="be">
   
   <head>
     <title>metaBelarus</title>
     <meta charset="utf-8">
     <meta name="description" content="Згуртаваныя звесткі пра Беларусь">
-    <meta name="keywords" content="Беларусь Belarus мова памяць літаратура">
+    <meta name="keywords" content="Беларусь, Belarus, мова, літаратура, памяць">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  
-  <body>
+
+  <body onload="loadData(loadDataSub)">
     
     <header>
       <nav>
         <ul>
-          <li>Галоўная</li>
+          <li><span style="font-size: large">&equiv;</span></li>
         </ul>
       </nav>
     </header>
     
     <main>
-      <h1>Тэмы</h1>
-      <div class="themes">
-        <ul>
-          <li>Літаратура</li>
-          <li>Памяць</li>
-        </ul>
-      </div>
+      <div id="divH1"></div>
+      <div id="divData" class="divCollections"></div>
     </main>
 
     <footer>
+      <a href="https://info.flagcounter.com/SO9r"><img src="https://s11.flagcounter.com/count2/SO9r/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
     </footer>
-    
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
+  <script src="js/script.js"></script>
+
+  <!-- <li><a href="./collection/TuzinFM-(nie)rasstralianaja-paezija/index.html">(Не)расстраляная паэзія (TuzinFM)</a></li> -->
+  <script id="data-template" type="text/template">
+    <!-- <h1>{{metadata.title}}</h1> -->
+      {{#collections}}
+        <a href="{{URL}}"><div>{{Title}}</div></a>
+      {{/collections}}
+  </script>
+
+  <script>
+    function loadDataSub(data) {
+      for (var i = 0; i < data.collections.length; i++) {
+        data.collections[i].Title = getCollectionTitle(data.collections[i].URL);          
+        // $.getJSON(data.collections[i].URL + "/data.json", function (data2) {
+        //   data.collections[i].Title = data2.metadata.title;
+        // });
+      }       
+    }
+  </script>
+
   </body>
   
 </html>

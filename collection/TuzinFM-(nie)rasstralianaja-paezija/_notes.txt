@@ -1,0 +1,18 @@
+﻿
+    <div class="tabs">
+      <button class="tablink" onclick="openTab(event, 'tabAnnounce')">Анонс</button>
+      <button class="tablink" onclick="openTab(event, 'tabAcoustic')">Акустычная версія</button>
+      <button class="tablink" onclick="openTab(event, 'tabLive')">Ужывую</button>
+    </div> 
+    <div id="tabAnnounce" class="tabcontent">
+      <h4>Анонс</h4>
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/{{song.ytubeID.announce}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div id="tabAcoustic" class="tabcontent">
+      <h4>Акустычная версія</h4>
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/{{song.ytubeID.acoustic}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div id="tabLive" class="tabcontent">
+      <h4>Ужывую</h4>
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/{{song.ytubeID.live}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
